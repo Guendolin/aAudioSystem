@@ -32,7 +32,7 @@ namespace aSystem.aAudioSystem
                 for(int i = _activeAudioSource.Count-1; i >= 0; i--)
                 {
                     aAudioSource aAudioSource = _activeAudioSource[i];
-                    Debug.Log("checking " + aAudioSource.gameObject.name + " IsActive=" + aAudioSource.IsActive());
+                    //Debug.Log("checking " + aAudioSource.gameObject.name + " IsActive=" + aAudioSource.IsActive());
                     if (!aAudioSource.IsActive())
                     {
                         ReturnAudioSource(aAudioSource);
@@ -90,6 +90,18 @@ namespace aSystem.aAudioSystem
         {
             aAudioSource aAudioSource = GetAudioSoruce();
             aAudioSource.PlayClip(audioClip);
+            return aAudioSource;
+        }
+
+        public aAudioSource PlayLoop(aAudioClip audioClip, aAudioSource aAudioSource, float volume = 1f, float pitch = 0f, float pan = 0f)
+        {
+            if(aAudioSource == null || !aAudioSource.IsActive())
+            {
+                aAudioSource = GetAudioSoruce();
+            }
+    
+            aAudioSource.PlayLoop(audioClip, volume, pitch, pan);
+
             return aAudioSource;
         }
     }
