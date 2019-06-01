@@ -58,9 +58,9 @@ namespace aSystem.aAudioSystem
             _playType = PlayType.Clip;
             _active = true;
 
-
-            audioSource.volume = _currentClipp.volume * volume;
-            audioSource.pitch = pitch;
+            audioSource.volume = _currentVolume = _currentClipp.volume * volume;
+            audioSource.pitch = _currentClipp.pitch + pitch;
+            audioSource.panStereo = _currentClipp.pan + pan;
 
             return this;
         }

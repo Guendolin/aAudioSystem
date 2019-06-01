@@ -8,11 +8,11 @@ namespace aSystem.aAudioSystem
     {
         public static aAudioSystem Instance;
 
-        public static aAudioSource _PlaySound(aAudioClip audioClip)
+        public static aAudioSource PlaySound(aAudioClip audioClip, float volume = 1f, float pitch = 0f, float pan = 0f)
         {
             if (Instance != null)
             {
-                return Instance._PlaySound(audioClip);
+                return Instance._PlaySound(audioClip, volume, pitch, pan);
             }
             else
             {
@@ -21,7 +21,7 @@ namespace aSystem.aAudioSystem
             return null;
         }
 
-        public static aAudioSource _PlayLoop(aAudioClip audioClip, aAudioSource aAudioSource, float volume = 1f, float pitch = 0f, float pan = 0f)
+        public static aAudioSource PlayLoop(aAudioClip audioClip, aAudioSource aAudioSource, float volume = 1f, float pitch = 0f, float pan = 0f)
         {
             if (Instance != null)
             {
@@ -51,7 +51,7 @@ namespace aSystem.aAudioSystem
             _activeAudioSource = new List<aAudioSource>();
         }
 
-        void Update()
+        private void Update()
         {
             if(_activeAudioSource.Count > 0)
             {
@@ -112,14 +112,14 @@ namespace aSystem.aAudioSystem
             _audioSourceQueue.Enqueue(audioSource);
         }
 
-        public aAudioSource _PlaySound(aAudioClip audioClip)
+        private aAudioSource _PlaySound(aAudioClip audioClip, float volume = 1f, float pitch = 0f, float pan = 0f)
         {
             aAudioSource aAudioSource = GetAudioSoruce();
-            aAudioSource.PlayClip(audioClip);
+            aAudioSource.PlayClip(audioClip, volume, pitch, pan);
             return aAudioSource;
         }
 
-        public aAudioSource _PlayLoop(aAudioClip audioClip, aAudioSource aAudioSource, float volume = 1f, float pitch = 0f, float pan = 0f)
+        private aAudioSource _PlayLoop(aAudioClip audioClip, aAudioSource aAudioSource, float volume = 1f, float pitch = 0f, float pan = 0f)
         {
             if(aAudioSource == null || !aAudioSource.IsActive())
             {
