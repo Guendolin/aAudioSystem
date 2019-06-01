@@ -8,6 +8,32 @@ namespace aSystem.aAudioSystem
     {
         public static aAudioSystem Instance;
 
+        public static aAudioSource _PlaySound(aAudioClip audioClip)
+        {
+            if (Instance != null)
+            {
+                return Instance._PlaySound(audioClip);
+            }
+            else
+            {
+                Debug.LogError("No touch system pressent in scene!");
+            }
+            return null;
+        }
+
+        public static aAudioSource _PlayLoop(aAudioClip audioClip, aAudioSource aAudioSource, float volume = 1f, float pitch = 0f, float pan = 0f)
+        {
+            if (Instance != null)
+            {
+                return Instance._PlayLoop(audioClip, aAudioSource, volume, pitch, pan);
+            }
+            else
+            {
+                Debug.LogError("No touch system pressent in scene!");
+            }
+            return null;
+        }
+
         private int _audioSourceNumber = 0;
         private Queue<aAudioSource> _audioSourceQueue;
         private List<aAudioSource> _activeAudioSource;
@@ -86,14 +112,14 @@ namespace aSystem.aAudioSystem
             _audioSourceQueue.Enqueue(audioSource);
         }
 
-        public aAudioSource PlaySound(aAudioClip audioClip)
+        public aAudioSource _PlaySound(aAudioClip audioClip)
         {
             aAudioSource aAudioSource = GetAudioSoruce();
             aAudioSource.PlayClip(audioClip);
             return aAudioSource;
         }
 
-        public aAudioSource PlayLoop(aAudioClip audioClip, aAudioSource aAudioSource, float volume = 1f, float pitch = 0f, float pan = 0f)
+        public aAudioSource _PlayLoop(aAudioClip audioClip, aAudioSource aAudioSource, float volume = 1f, float pitch = 0f, float pan = 0f)
         {
             if(aAudioSource == null || !aAudioSource.IsActive())
             {
